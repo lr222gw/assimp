@@ -1360,20 +1360,20 @@ if(MSVC AND ASSIMP_INSTALL_PDB)
   ENDIF()
 
   IF(CMAKE_GENERATOR MATCHES "^Visual Studio")
-    install(FILES ${Assimp_BINARY_DIR}/code/Debug/assimp${LIBRARY_SUFFIX}${CMAKE_DEBUG_POSTFIX}.pdb
+    install(FILES ${Assimp_BINARY_DIR}/bin/Debug/assimp${LIBRARY_SUFFIX}${CMAKE_DEBUG_POSTFIX}.pdb
       DESTINATION ${ASSIMP_LIB_INSTALL_DIR}
       CONFIGURATIONS Debug
     )
-    install(FILES ${Assimp_BINARY_DIR}/code/RelWithDebInfo/assimp${LIBRARY_SUFFIX}.pdb
+    install(FILES ${Assimp_BINARY_DIR}/bin/RelWithDebInfo/assimp${LIBRARY_SUFFIX}.pdb
       DESTINATION ${ASSIMP_LIB_INSTALL_DIR}
       CONFIGURATIONS RelWithDebInfo
     )
   ELSE()
-    install(FILES ${Assimp_BINARY_DIR}/code/assimp${LIBRARY_SUFFIX}${CMAKE_DEBUG_POSTFIX}.pdb
+    install(FILES ${Assimp_BINARY_DIR}/bin/assimp${LIBRARY_SUFFIX}${CMAKE_DEBUG_POSTFIX}.pdb
       DESTINATION ${ASSIMP_LIB_INSTALL_DIR}
       CONFIGURATIONS Debug
     )
-    install(FILES ${Assimp_BINARY_DIR}/code/assimp${LIBRARY_SUFFIX}.pdb
+    install(FILES ${Assimp_BINARY_DIR}/bin/assimp${LIBRARY_SUFFIX}.pdb
       DESTINATION ${ASSIMP_LIB_INSTALL_DIR}
       CONFIGURATIONS RelWithDebInfo
     )
