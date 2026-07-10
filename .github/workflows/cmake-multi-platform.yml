@@ -28,7 +28,6 @@ jobs:
           -S .
           -B build
           -G Ninja
-          -A x64
           -DBUILD_SHARED_LIBS=ON
           -DCMAKE_BUILD_TYPE=Release
           -DASSIMP_BUILD_TESTS=OFF
