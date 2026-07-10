@@ -30,8 +30,6 @@ jobs:
           -G Ninja
           -DBUILD_SHARED_LIBS=ON
           -DCMAKE_BUILD_TYPE=Release
-          -DASSIMP_INSTALL=ON
-          -DCMAKE_INSTALL_PREFIX=${{ github.workspace }}/install
 
       - name: Build
         run: cmake --build build --config Release --parallel
