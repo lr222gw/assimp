@@ -34,9 +34,6 @@ jobs:
       - name: Build
         run: cmake --build build --config Release --parallel
 
-      - name: Install
-        run: cmake --install build --config Release
-
       #
       # Complete build output
       #
@@ -57,14 +54,7 @@ jobs:
             build/**/*.exe
 
       #
-      # Installed SDK
-      #
-      - name: Upload install directory
-        uses: actions/upload-artifact@v4
-        with:
-          name: assimp-sdk-release
-          compression-level: 0
-          path: install/**
+      # 
 
       #
       # Optional: source snapshot
