@@ -1,0 +1,86 @@
+name: Build Assimp Release
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+      - main
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup MSVC
+        uses: ilammy/msvc-dev-cmd@v1
+
+      - name: Setup CMake
+        uses: lukka/get-cmake@latest
+
+      - name: Configure
+        run: >
+          cmake
+          -S .
+          -B build
+          -G "Visual Studio 17 2022"
+          -A x64
+          -DBUILD_SHARED_LIBS=ON
+          -DCMAKE_BUILD_TYPE=Release
+          -DASSIMP_BUILD_TESTS=OFF
+          -DASSIMP_BUILD_ASSIMP_TOOLS=ON
+          -DASSIMP_BUILD_SAMPLES=ON
+          -DASSIMP_INSTALL=ON
+          -DCMAKE_INSTALL_PREFIX=${{ github.workspace }}/install
+
+      - name: Build
+        run: cmake --build build --config Release --parallel
+
+      - name: Install
+        run: cmake --install build --config Release
+
+      #
+      # Complete build output
+      #
+      - name: Upload build directory
+        uses: actions/upload-artifact@v4
+        with:
+          name: assimp-build-release
+          compression-level: 0
+          path: |
+            build/bin/Release/**
+            build/lib/Release/**
+            build/code/Release/**
+            build/*.sln
+            build/**/*.vcxproj
+            build/**/*.pdb
+            build/**/*.dll
+            build/**/*.lib
+            build/**/*.exe
+
+      #
+      # Installed SDK
+      #
+      - name: Upload install directory
+        uses: actions/upload-artifact@v4
+        with:
+          name: assimp-sdk-release
+          compression-level: 0
+          path: install/**
+
+      #
+      # Optional: source snapshot
+      #
+      - name: Upload source
+        uses: actions/upload-artifact@v4
+        with:
+          name: assimp-source
+          path: |
+            include/**
+            code/**
+            CMakeLists.txt
+            LICENSE
+            Readme.md
